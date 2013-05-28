@@ -117,7 +117,6 @@ namespace Application.Helper.Helpers
             }
             catch (Exception)
             {
-                //AcceptAlert();
                 Logger.Log("-> false");
                 return false;
             }
@@ -131,6 +130,14 @@ namespace Application.Helper.Helpers
             string description = GetContentItemDescription();
             Logger.Log("-> description: " + description);
             return description;
+        }
+
+        public string GetExpectedYouTubeUri(string uri)
+        {
+            Logger.Log("<- uri: " + uri, LogType.MessageWithoutScreenshot);
+            string expectedUri = "http://www.youtube.com/embed/" + (uri.Split('=')[1]);
+            Logger.Log("-> expected uri: " + expectedUri, LogType.MessageWithoutScreenshot);
+            return expectedUri;
         }
 
         private void ConfirmDeletion()
