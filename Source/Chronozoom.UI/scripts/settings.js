@@ -10,6 +10,7 @@ var CZ;
         Settings.zoomLevelFactor = 1.4;
         Settings.allowedVisibileImprecision = 0.00001;
         Settings.allowedMathImprecision = 0.0000001;
+        Settings.allowedMathImprecisionDecimals = parseInt(Settings.allowedMathImprecision.toExponential().split("-")[1]);
         Settings.canvasElementAnimationTime = 1300;
         Settings.canvasElementFadeInTime = 400;
         Settings.contentScaleMargin = 20;
@@ -166,6 +167,13 @@ var CZ;
         Settings.signinUrlGoogle = "";
         Settings.signinUrlYahoo = "";
         Settings.guidEmpty = "00000000-0000-0000-0000-000000000000";
+        Settings.ie = ((function () {
+            var v = 3, div = document.createElement('div'), a = div.all || [];
+            while(div.innerHTML = '<!--[if gt IE ' + (++v) + ']><br><![endif]-->' , a[0]) {
+                ;
+            }
+            return (v > 4) ? v : undefined;
+        })());
     })(CZ.Settings || (CZ.Settings = {}));
     var Settings = CZ.Settings;
 })(CZ || (CZ = {}));

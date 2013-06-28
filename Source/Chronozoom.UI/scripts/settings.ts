@@ -12,6 +12,7 @@
         export var zoomLevelFactor = 1.4;  //the step of the zooming
         export var allowedVisibileImprecision = 0.00001; // allowed imprecision in compare of two visibles
         export var allowedMathImprecision = 0.0000001; // allowed imprecision in float (10^-7)
+        export var allowedMathImprecisionDecimals = parseInt(allowedMathImprecision.toExponential().split("-")[1]); // allowedMathImprecision in decimals places
         export var canvasElementAnimationTime = 1300; //duration of animation of resize or transition of canvas element
         export var canvasElementFadeInTime = 400; // duration of fade in animation of newly added canvas element
 
@@ -159,5 +160,13 @@
 
         // General constants
         export var guidEmpty = "00000000-0000-0000-0000-000000000000";
+
+        // NOTE: IE version detection.
+        //       https://gist.github.com/padolsey/527683
+        export var ie = (function() {
+            var v = 3, div = document.createElement('div'), a = div.all || [];
+            while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]); 
+            return (v > 4) ? v : undefined;
+        }());
     }
 }
