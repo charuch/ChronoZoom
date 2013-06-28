@@ -122,7 +122,7 @@ namespace Chronozoom.Entities
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        public IEnumerable<Timeline> TimelineSubtreeQuery(Guid collectionId, Guid? leastCommonAncestor, decimal startTime, decimal endTime, decimal minSpan, int maxElements)
+        public IEnumerable<Timeline> TimelineSubtreeQuery(Guid collectionId, Guid? leastCommonAncestor, decimal startTime, decimal endTime, decimal minSpan, int maxElements, bool returnPathToRoot, bool includeSibling)
         {
             int maxAllElements = 0;
             Dictionary<Guid, Timeline> timelinesMap = new Dictionary<Guid, Timeline>();
@@ -130,7 +130,7 @@ namespace Chronozoom.Entities
 
             if (System.Configuration.ConfigurationManager.ConnectionStrings[0].ProviderName.Equals("System.Data.SqlClient"))
             {
-                allTimelines = Database.SqlQuery<TimelineRaw>("EXEC TimelineSubtreeQuery {0}, {1}, {2}, {3}, {4}, {5}", collectionId, leastCommonAncestor, minSpan, startTime, endTime, maxElements);
+                allTimelines = Database.SqlQuery<TimelineRaw>("EXEC TimelineSubtreeQuery {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", collectionId, leastCommonAncestor, minSpan, startTime, endTime, maxElements, returnPathToRoot, includeSibling);
             }
             else
             {

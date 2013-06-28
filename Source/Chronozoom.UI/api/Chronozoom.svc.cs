@@ -254,7 +254,7 @@ namespace Chronozoom.UI
         /// Documentation under IChronozoomSVC
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "minspan")]
-        public Timeline GetTimelines(string superCollection, string collection, string start, string end, string minspan, string commonAncestor, string maxElements, string depth)
+        public Timeline GetTimelines(string superCollection, string collection, string start, string end, string minspan, string commonAncestor, string maxElements, string depth, string returnPathToRoot, string includeSibling)
         {
             return ApiOperation(delegate(User user, Storage storage)
             {
@@ -292,7 +292,9 @@ namespace Chronozoom.UI
                     else
                     {
                         Trace.TraceInformation("Get Timelines - Using Progressive Load");
-                        timelines = storage.TimelineSubtreeQuery(collectionId, lcaParsed, startTime, endTime, span, maxElementsParsed);
+                        bool rootToPath = string.IsNullOrEmpty(returnPathToRoot) ? false : bool.Parse(returnPathToRoot);
+                        bool sibling = string.IsNullOrWhiteSpace(includeSibling) ? false : bool.Parse(includeSibling);
+                        timelines = storage.TimelineSubtreeQuery(collectionId, lcaParsed, startTime, endTime, span, maxElementsParsed, rootToPath, sibling);
                     }
                 }
 

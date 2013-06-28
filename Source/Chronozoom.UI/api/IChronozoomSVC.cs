@@ -43,7 +43,7 @@ namespace Chronozoom.UI
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "minspan")]
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json)]
-        Timeline GetTimelines(string superCollection, string collection, string start, string end, string minspan, string commonAncestor, string maxElements, string depth);
+        Timeline GetTimelines(string superCollection, string collection, string start, string end, string minspan, string commonAncestor, string maxElements, string depth, string returnPathToRoot, string includeSibling);
 
         /// <summary>
         /// Performs a search for a specific term within a collection or a superCollection.
